@@ -64,10 +64,10 @@ namespace dakuang
 
     private:
         // 静态线程函数
-        static void* __threadbody(void* _lp);
+        static void* __threadBody(void* _lp);
 
         // 工作线程主体
-        void __threadloop();
+        void __threadLoop();
 
         // 路由事件
         void __routerEvent(const std::string& strEvent, void* pData);
@@ -75,13 +75,14 @@ namespace dakuang
     private:
         // 事件回调表
         MAP_EVENT_CB_t m_mapEventCB;
+        pthread_mutex_t m_mutexEventCB;
 
         // 事件队列
         CEventQueue m_eventQueue;
 
         // 工作线程
         pthread_t m_tidWorking;
-        bool m_bRuning;
+        bool m_bRunning;
     };
 
     // 一个基于线程的定时器
@@ -102,10 +103,10 @@ namespace dakuang
 
     private:
         // 静态线程函数
-        static void* __threadbody(void* _lp);
+        static void* __threadBody(void* _lp);
 
         // 工作线程主体
-        void __threadloop();
+        void __threadLoop();
 
         // 等待一个周期
         void __delayInterval();
