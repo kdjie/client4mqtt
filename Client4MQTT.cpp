@@ -3,6 +3,10 @@
 #include <stdarg.h>
 #include <string.h>
 
+#ifdef __windows__
+#include <windows.h>
+#endif
+
 void OutputDebugString(const char* sFormat, ...)
 {
     char sLine[128] = {0};
@@ -16,7 +20,9 @@ void OutputDebugString(const char* sFormat, ...)
 
 #ifdef __linux__
     ::printf("%s", strOutput.c_str());
-#else
+#endif
+
+#ifdef __windows__
     ::OutputDebugStringA(strOutput.c_str());
 #endif
 }
